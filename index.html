@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Flo 💜 — Our Sunset & Beach Scrapbook</title>
+    <!-- Google Fonts: Playfair Display, Plus Jakarta Sans, and Caveat for handwritten touches -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti for celebrations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FBF7FC',
+                        paper: '#FFFDFB',
+                        plum: '#5B2A86',
+                        plumDark: '#3E195E',
+                        lavender: '#EDE4F7',
+                        sunset: '#F2855E',
+                        sunsetCoral: '#E06646',
+                        gold: '#E5A93B',
+                        ocean: '#2B3A55',
+                        ink: '#241B2F',
+                        muted: '#665A73'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        hand: ['"Caveat"', 'cursive']
+                    },
+                    boxShadow: {
+                        'polaroid': '0 12px 28px -5px rgba(62, 25, 94, 0.14), 0 8px 12px -6px rgba(62, 25, 94, 0.08)',
+                        'envelope': '0 14px 32px -8px rgba(91, 42, 134, 0.22)',
+                        'card': '0 20px 45px -15px rgba(62, 25, 94, 0.12)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* BMW M5 + Purple Sunset & Ocean Breeze subtle twilight backdrop */
+        body {
+            background-color: #FBF7FC;
+            background-image:
+                linear-gradient(180deg, rgba(251, 247, 252, 0.86) 0%, rgba(237, 228, 247, 0.84) 45%, rgba(251, 247, 252, 0.90) 100%),
+                radial-gradient(circle at 15% 15%, rgba(242, 133, 94, 0.25) 0%, transparent 45%),
+                radial-gradient(circle at 85% 20%, rgba(91, 42, 134, 0.25) 0%, transparent 45%),
+                url('https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=1920&q=85');
+            background-size: cover, 100% 100%, 100% 100%, cover;
+            background-position: center, center, center, center 55%;
+            background-attachment: fixed;
+            color: #241B2F;
+            overflow-x: hidden;
+        }
+
+        /* Floating Sunset & Lavender Ambient Glow Particles */
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.55; }
+            50% { transform: translateY(-18px) scale(1.08); opacity: 0.85; }
+        }
+        .glow-orb {
+            animation: floatGlow 7s ease-in-out infinite;
+        }
+        .glow-orb-delayed {
+            animation: floatGlow 9s ease-in-out 2.5s infinite;
+        }
+
+        .polaroid-card {
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+        }
+        .polaroid-card:hover {
+            transform: translateY(-6px) rotate(0deg) scale(1.02) !important;
+            box-shadow: 0 22px 38px -10px rgba(62, 25, 94, 0.2);
+            z-index: 20;
+        }
+
+        /* Envelope Styling */
+        .envelope-wrapper {
+            perspective: 1000px;
+        }
+        .envelope-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .envelope-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Card Deck Shuffle Animation */
+        @keyframes cardPop {
+            0% { transform: scale(0.95) rotate(-1deg); opacity: 0.7; }
+            50% { transform: scale(1.02) rotate(1deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        .animate-card-pop {
+            animation: cardPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FBF7FC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5B2A8655;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5B2A86;
+        }
+
+        /* Hide file input */
+        input[type="file"] {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-plum/20 selection:text-plumDark relative">
+
+    <!-- Ambient Sunset & Lavender Glow Orbs -->
+    <div class="pointer-events-none fixed inset-0 overflow-hidden z-0">
+        <div class="glow-orb absolute -top-20 -left-20 w-72 h-72 rounded-full bg-sunset/20 blur-3xl"></div>
+        <div class="glow-orb-delayed absolute top-40 -right-24 w-80 h-80 rounded-full bg-plum/15 blur-3xl"></div>
+        <div class="glow-orb absolute bottom-20 left-1/4 w-64 h-64 rounded-full bg-gold/15 blur-3xl"></div>
+    </div>
+
+    <!-- Top Floating Control Bar -->
+    <nav class="sticky top-0 z-40 bg-cream/85 backdrop-blur-md border-b border-plum/15 px-4 py-3">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-full bg-gradient-to-br from-plum to-sunset text-white flex items-center justify-center shadow-sm">
+                    <i data-lucide="sunset" class="w-4 h-4"></i>
+                </span>
+                <span class="font-serif font-bold text-lg tracking-tight text-ink">For Flo 💜</span>
+            </div>
+
+            <!-- Quick Anchor Links (Desktop) -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-muted">
+                <a href="#gallery" class="hover:text-plum transition-colors">Memory Wall</a>
+                <a href="#letters" class="hover:text-plum transition-colors">Open When...</a>
+                <a href="#appreciation" class="hover:text-plum transition-colors">Why You Shine</a>
+                <a href="#bucketlist" class="hover:text-plum transition-colors">What to Do Together</a>
+            </div>
+
+            <!-- Customize & Share Controls -->
+            <div class="flex items-center gap-2">
+                <button id="toggleEditModeBtn" onclick="toggleEditMode()" class="flex items-center gap-2 px-3.5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all border border-plum/30 bg-paper text-ink hover:bg-lavender/70">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-plum"></i>
+                    <span id="editModeLabel">Customize Mode: OFF</span>
+                </button>
+                <button onclick="openShareModal()" class="flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bg-gradient-to-r from-plum to-plumDark text-white hover:opacity-95 transition-all shadow-sm">
+                    <i data-lucide="gift" class="w-4 h-4"></i>
+                    <span>Gift / Export App</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Edit Mode Banner (Visible only when Customize Mode is ON) -->
+    <div id="editBanner" class="hidden relative z-30 bg-gradient-to-r from-plum via-plumDark to-ocean text-white text-center py-2.5 px-4 text-xs sm:text-sm font-medium shadow-inner">
+        <div class="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-3">
+            <span>💜 <strong>Customize Mode Active:</strong> Tap any photo to replace it, edit captions, rewrite letters, or update dates! Everything saves automatically.</span>
+            <button onclick="resetToDefaults()" class="underline hover:text-lavender text-xs">Reset Defaults</button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-24">
+
+        <!-- 1. HERO SECTION & FRIENDSHIP COUNTER -->
+        <header class="pt-12 sm:pt-16 text-center max-w-3xl mx-auto space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-lavender text-plum font-semibold text-xs uppercase tracking-widest border border-plum/20 shadow-2xs">
+                <i data-lucide="waves" class="w-3.5 h-3.5 text-sunset"></i>
+                <span>Beach Breeze • Purple Skies • Real Sisterhood</span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-6xl font-bold text-ink leading-tight">
+                For <span id="friendNameDisplay" class="bg-gradient-to-r from-plum via-sunsetCoral to-sunset bg-clip-text text-transparent italic relative inline-block">
+                    Flo 💜
+                </span>
+            </h1>
+
+            <p id="heroSubtitle" class="text-base sm:text-lg text-muted max-w-xl mx-auto leading-relaxed">
+                For a genuine, grounded soul who finds peace in ocean waves, golden-to-purple sunsets, and real, unfiltered laughter. One whole year of real sisterhood—here’s to many more.
+            </p>
+
+            <!-- Edit Hero Details (Only shown in Customize Mode) -->
+            <div id="heroEditor" class="hidden bg-paper p-5 rounded-2xl border border-plum/25 shadow-sm max-w-lg mx-auto text-left space-y-3">
+                <div class="text-xs font-bold uppercase tracking-wider text-plum">Personalize Header</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-muted mb-1">Her Name / Title</label>
+                        <input type="text" id="inputFriendName" oninput="updateHeroData()" class="w-full px-3 py-2 rounded-xl border border-plum/20 bg-cream text-sm focus:outline-none focus:border-plum">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-muted mb-1">Friendship Start Date</label>
+                        <input type="date" id="inputStartDate" oninput="updateHeroData()" class="w-full px-3 py-2 rounded-xl border border-plum/20 bg-cream text-sm focus:outline-none focus:border-plum">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-muted mb-1">Heartfelt Intro Note</label>
+                    <textarea id="inputSubtitle" rows="2" oninput="updateHeroData()" class="w-full px-3 py-2 rounded-xl border border-plum/20 bg-cream text-sm focus:outline-none focus:border-plum"></textarea>
+                </div>
+            </div>
+
+            <!-- Live Friendship Counter Card -->
+            <div class="pt-4">
+                <div class="bg-paper rounded-3xl p-6 sm:p-8 shadow-card border border-plum/20 max-w-2xl mx-auto relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-sunset/20 via-plum/10 to-transparent rounded-bl-full pointer-events-none"></div>
+                    <p class="text-xs font-bold uppercase tracking-widest text-muted mb-4">Walking Through Life Together Since <span id="formattedStartDate" class="text-plum">November 25, 2025</span></p>
+                    <div class="grid grid-cols-3 gap-3 sm:gap-6">
+                        <div class="bg-lavender/50 rounded-2xl p-3 sm:p-4 border border-plum/10">
+                            <div id="countYears" class="font-serif text-3xl sm:text-5xl font-bold text-plum">1</div>
+                            <div id="countYearsLabel" class="text-xs sm:text-sm font-medium text-muted mt-1">Year</div>
+                        </div>
+                        <div class="bg-sunset/10 rounded-2xl p-3 sm:p-4 border border-sunset/20">
+                            <div id="countDays" class="font-serif text-3xl sm:text-5xl font-bold text-sunsetCoral">365</div>
+                            <div class="text-xs sm:text-sm font-medium text-muted mt-1">Days</div>
+                        </div>
+                        <div class="bg-lavender/50 rounded-2xl p-3 sm:p-4 border border-plum/10">
+                            <div id="countLaughs" class="font-serif text-3xl sm:text-5xl font-bold text-ocean">∞</div>
+                            <div class="text-xs sm:text-sm font-medium text-muted mt-1">Sunsets & Laughs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 2. OUR POLAROID MEMORY WALL -->
+        <section id="gallery" class="space-y-8 scroll-mt-24">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-plum/15 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-sunsetCoral">Snapshots Of Us</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-ink mt-1">Our Polaroid Memory Wall</h2>
+                    <p id="galleryHelperText" class="hidden text-xs sm:text-sm text-muted mt-1">Tap any photo to upload Flo’s pictures, and click directly on any caption or tag below a photo to type your own.</p>
+                </div>
+                <div id="galleryEditActions" class="hidden flex-wrap items-center gap-2.5 self-start sm:self-auto">
+                    <label class="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-plum to-sunsetCoral text-white text-sm font-semibold hover:opacity-95 transition shadow-sm">
+                        <i data-lucide="images" class="w-4 h-4"></i>
+                        <span>Bulk Upload Photos</span>
+                        <input type="file" accept="image/*" multiple onchange="handleBulkPhotoUpload(event)">
+                    </label>
+                    <button onclick="addNewPolaroid()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-lavender text-plum border border-plum/20 text-sm font-semibold hover:bg-plum hover:text-white transition">
+                        <i data-lucide="image-plus" class="w-4 h-4"></i>
+                        <span>Add Blank Frame</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Polaroid Grid -->
+            <div id="polaroidGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pt-2">
+                <!-- Polaroids injected via JS -->
+            </div>
+        </section>
+
+        <!-- 3. "OPEN WHEN..." PURPLE ENVELOPES -->
+        <section id="letters" class="space-y-8 scroll-mt-24">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-plum">Sealed In Purple & Gold</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-ink">Open When...</h2>
+                <p class="text-sm sm:text-base text-muted">Little envelopes sealed with love for whenever you need a piece of home, peace, or a good laugh. Tap one to break the wax seal.</p>
+            </div>
+
+            <div id="envelopesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Envelopes injected via JS -->
+            </div>
+        </section>
+
+        <!-- 4. "WHY FLO IS IRREPLACEABLE" CARD DECK -->
+        <section id="appreciation" class="scroll-mt-24">
+            <div class="bg-gradient-to-br from-plum/12 via-paper to-sunset/15 rounded-3xl p-6 sm:p-12 border border-plum/20 shadow-card relative overflow-hidden">
+                <div class="max-w-2xl mx-auto text-center space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-paper text-plum text-xs font-bold uppercase tracking-wider shadow-sm border border-plum/15">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-gold"></i>
+                        <span>Unfiltered Appreciation Deck</span>
+                    </div>
+
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-ink">Why Flo Is Irreplaceable</h2>
+
+                    <!-- Active Card -->
+                    <div id="reasonCard" class="bg-paper rounded-2xl p-8 sm:p-10 shadow-polaroid border border-gold/40 min-h-[210px] flex flex-col items-center justify-center relative transition-all">
+                        <span id="reasonCounter" class="absolute top-4 right-5 text-xs font-semibold text-muted/70">1 / 8</span>
+                        <i data-lucide="quote" class="w-8 h-8 text-plum/30 mb-3"></i>
+                        <p id="reasonText" class="font-serif text-xl sm:text-2xl text-ink leading-relaxed italic">
+                            "You have the rarest, most peaceful energy—just a genuine, grounded soul who makes everyone around you feel safe to be themselves."
+                        </p>
+                    </div>
+
+                    <!-- Deck Actions -->
+                    <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                        <button onclick="shuffleReason()" class="flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-plum to-sunsetCoral text-white font-semibold text-sm sm:text-base hover:opacity-95 transition-all shadow-md hover:shadow-lg active:scale-95">
+                            <i data-lucide="shuffle" class="w-4 h-4"></i>
+                            <span>Draw Another Card</span>
+                        </button>
+                        <button id="addReasonBtn" onclick="openAddReasonModal()" class="hidden items-center gap-2 px-5 py-3.5 rounded-full bg-paper text-ink border border-plum/20 font-semibold text-sm hover:bg-lavender/50 transition-all">
+                            <i data-lucide="plus-circle" class="w-4 h-4 text-plum"></i>
+                            <span>Add Your Own Note</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. WHAT TO DO TOGETHER -->
+        <section id="bucketlist" class="space-y-8 scroll-mt-24">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-plum/15 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold">Our Shared Vision & Vibes</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-ink mt-1">What to Do Together</h2>
+                </div>
+                <div class="text-sm font-medium text-muted">
+                    <span id="bucketProgressText" class="text-plum font-bold">0 of 0</span> Plans Checked Off
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full h-3 bg-plum/10 rounded-full overflow-hidden">
+                <div id="bucketProgressBar" class="h-full bg-gradient-to-r from-plum via-sunsetCoral to-gold transition-all duration-500 rounded-full" style="width: 0%"></div>
+            </div>
+
+            <!-- Add New Plan Form (Shown only in Customize Mode) -->
+            <form id="addBucketForm" onsubmit="addBucketItem(event)" class="hidden flex-col sm:flex-row gap-3">
+                <input type="text" id="newBucketInput" placeholder="Write something you and Flo want to do together..." class="flex-1 px-4 py-3 rounded-2xl bg-paper border border-plum/20 text-sm focus:outline-none focus:border-plum shadow-sm" required>
+                <button type="submit" class="px-6 py-3 rounded-2xl bg-plum text-white font-semibold text-sm hover:bg-plumDark transition flex items-center justify-center gap-2 shadow-sm">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span>Add Plan</span>
+                </button>
+            </form>
+
+            <!-- Checklist Items -->
+            <div id="bucketListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Plans injected via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-plum/15 bg-paper py-10 px-4 text-center space-y-2">
+        <p class="font-serif italic text-lg text-ink">“Here’s to purple skies, ocean breezes, and a friendship that never fades.”</p>
+        <p class="text-xs text-muted">Made with real sisterhood & love for Flo 💜</p>
+    </footer>
+
+    <!-- MODAL 1: "Open When" Letter Viewer & Editor -->
+    <div id="letterModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-ink/60 backdrop-blur-sm">
+        <div class="bg-paper rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gold/40 relative space-y-5 animate-card-pop">
+            <button onclick="closeLetterModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-lavender/60 hover:bg-plum/15 flex items-center justify-center text-ink transition">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-plum to-sunset text-white flex items-center justify-center shadow-sm">
+                    <i data-lucide="mail-open" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-plum">Purple Wax Seal Broken</span>
+                    <h3 id="modalLetterTitle" class="font-serif text-xl sm:text-2xl font-bold text-ink">Open when you miss the beach</h3>
+                </div>
+            </div>
+
+            <!-- Read Mode View -->
+            <div id="letterReadView" class="bg-cream p-6 rounded-2xl border border-plum/15 space-y-4">
+                <p id="modalLetterBody" class="font-sans text-base text-ink/90 leading-relaxed whitespace-pre-line"></p>
+                <p class="font-hand text-2xl text-plum text-right pt-2">— Always in your corner 💜</p>
+            </div>
+
+            <!-- Edit Mode View inside Modal -->
+            <div id="letterEditView" class="hidden space-y-3">
+                <div>
+                    <label class="block text-xs font-semibold text-muted mb-1">Envelope Prompt Title</label>
+                    <input type="text" id="editLetterTitleInput" class="w-full px-3 py-2 rounded-xl border border-plum/20 bg-cream text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-muted mb-1">Your Heartfelt Words to Flo</label>
+                    <textarea id="editLetterBodyInput" rows="5" class="w-full px-3 py-2 rounded-xl border border-plum/20 bg-cream text-sm leading-relaxed"></textarea>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+                <button id="toggleLetterEditBtn" onclick="toggleModalLetterEdit()" class="hidden text-xs font-semibold text-plum hover:underline items-center gap-1.5">
+                    <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                    <span>Edit This Letter</span>
+                </button>
+                <button onclick="closeLetterModal()" class="ml-auto px-5 py-2.5 rounded-full bg-plum text-white text-sm font-semibold hover:bg-plumDark transition">
+                    Fold & Keep Safe
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Add Reason Modal -->
+    <div id="reasonModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-ink/60 backdrop-blur-sm">
+        <div class="bg-paper rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-plum/20 space-y-4">
+            <h3 class="font-serif text-2xl font-bold text-ink">Add a Note for Flo</h3>
+            <p class="text-sm text-muted">Write something you love, admire, or an inside joke only you and Flo get.</p>
+            <textarea id="newReasonInput" rows="3" placeholder="e.g., How we can sit watching the sunset in complete silence and still understand each other..." class="w-full p-3.5 rounded-2xl bg-cream border border-plum/20 text-sm focus:outline-none focus:border-plum"></textarea>
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="closeAddReasonModal()" class="px-4 py-2 rounded-full text-sm font-medium text-muted hover:bg-lavender/50">Cancel</button>
+                <button onclick="saveNewReason()" class="px-5 py-2 rounded-full bg-plum text-white text-sm font-semibold hover:bg-plumDark">Add to Deck</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: Share / Export Scrapbook Modal -->
+    <div id="shareModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-ink/60 backdrop-blur-sm">
+        <div class="bg-paper rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gold/40 space-y-5 relative">
+            <button onclick="closeShareModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-lavender/60 hover:bg-plum/15 flex items-center justify-center">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="space-y-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-plum">Send to Flo</span>
+                <h3 class="font-serif text-2xl font-bold text-ink">Gift & Export Your Scrapbook</h3>
+                <p class="text-sm text-muted">Once you upload Flo's photos and customize your notes, download this single HTML file and send it straight to her on WhatsApp or email—all her photos stay baked inside!</p>
+            </div>
+
+            <div class="bg-lavender/40 p-4 rounded-2xl border border-plum/15 space-y-3">
+                <button onclick="downloadStandaloneHTML()" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-plum to-sunsetCoral text-white font-semibold text-sm hover:opacity-95 transition flex items-center justify-center gap-2 shadow-sm">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Download "for_flo.html" Gift File</span>
+                </button>
+                <p class="text-xs text-muted text-center">Opens on any phone or computer with zero setup or sign-in required.</p>
+            </div>
+
+            <div class="border-t border-plum/10 pt-4 flex flex-wrap items-center justify-between gap-2">
+                <button onclick="exportJSONBackup()" class="text-xs font-semibold text-plum hover:underline flex items-center gap-1">
+                    <i data-lucide="file-json" class="w-3.5 h-3.5"></i>
+                    <span>Save Backup (.json)</span>
+                </button>
+                <label class="text-xs font-semibold text-ink hover:underline flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="upload" class="w-3.5 h-3.5"></i>
+                    <span>Load Backup (.json)</span>
+                    <input type="file" accept=".json" onchange="importJSONBackup(event)">
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden items-center gap-2 px-5 py-3 rounded-full bg-plumDark text-white text-sm font-medium shadow-xl border border-gold/30">
+        <i data-lucide="sparkles" class="w-4 h-4 text-gold"></i>
+        <span id="toastMessage">Saved!</span>
+    </div>
+
+    <script>
+        // ==========================================
+        // DEFAULT SCRAPBOOK DATA FOR FLO
+        // ==========================================
+        const DEFAULT_DATA = {
+            friendName: "Flo 💜",
+            startDate: "2025-11-25",
+            subtitle: "For a genuine, grounded soul who finds peace in ocean waves, golden-to-purple sunsets, and real, unfiltered laughter. One whole year of real sisterhood—here’s to many more.",
+            polaroids: [
+                {
+                    id: 1,
+                    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+                    caption: "Click here to write your own caption ✨",
+                    date: "Tap to edit date / tag",
+                    rotation: "-2deg"
+                },
+                {
+                    id: 2,
+                    image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80",
+                    caption: "Unfiltered laughs & real talks 💜",
+                    date: "Bestie Moments",
+                    rotation: "1.5deg"
+                },
+                {
+                    id: 3,
+                    image: "https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?auto=format&fit=crop&w=800&q=80",
+                    caption: "Just two real ones vibing",
+                    date: "Day One Energy",
+                    rotation: "-1.5deg"
+                },
+                {
+                    id: 4,
+                    image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80",
+                    caption: "Purple skies & dream car talks",
+                    date: "Flo's Favorite Color 💜",
+                    rotation: "2deg"
+                }
+            ],
+            letters: [
+                {
+                    id: 1,
+                    title: "Open when you miss the beach",
+                    tag: "Ocean Breeze",
+                    body: "Close your eyes for ten seconds and picture the tide rolling in right as the sky turns deep violet and warm gold. No noise, no stress—just salt air and peace. Whenever the week feels loud, remember we are always one beach walk away from resetting everything."
+                },
+                {
+                    id: 2,
+                    title: "Open when you need a reminder of how amazing you are",
+                    tag: "Real Talk",
+                    body: "Flo, you don't ever have to do the most to shine. Your simplicity, your loyalty, and the calm, genuine warmth you carry into every room are unmatched. Anyone blessed to call you their friend knows what real love looks like—and I’m grateful every single day that it’s me."
+                },
+                {
+                    id: 3,
+                    title: "Open when life feels heavy",
+                    tag: "Sisterhood Safe Space",
+                    body: "Take a deep breath and drop your shoulders. You don't have to carry everything on your own or pretend you're okay when you're tired. Text me right now—we can sit by the water, watch the sunset in silence, or talk it all out until your heart feels lighter."
+                },
+                {
+                    id: 4,
+                    title: "Open when you want to manifest our future",
+                    tag: "BMW & Big Dreams",
+                    body: "Remember how one look across the room is all it takes for both of us to start smiling? From coast drives in our dream BMW to watching purple sunsets without a single worry in the world—everything we talk about is coming. Keep shining, Flo."
+                }
+            ],
+            reasons: [
+                "You have the rarest, most peaceful energy—just a genuine, grounded soul who makes everyone around you feel safe to be themselves.",
+                "You appreciate the simple, real things in life: a good sunset, ocean air, and honest conversation.",
+                "One day we’re pulling up to the beach at sunset in our dream BMW with the windows down and our favorite songs playing.",
+                "One look between us says a whole paragraph without either of us saying a word.",
+                "You celebrate my wins with pure love and zero envy—that kind of sisterhood is priceless.",
+                "Even when we're just chilling doing nothing, hanging out with you feels like an exhale.",
+                "You stay true to who you are—authentic, effortless, and full of grace.",
+                "Watching the sky turn purple at dusk automatically reminds me of your smile and calm spirit.",
+                "One year of friendship with you already feels like a lifetime of real loyalty and love."
+            ],
+            bucketList: []
+        };
+
+        // Load saved state or use embedded data
+        let scrapbookData = JSON.parse(localStorage.getItem('for_flo_scrapbook_v2')) || JSON.parse(JSON.stringify(DEFAULT_DATA));
+        let isEditMode = false;
+        let currentReasonIndex = 0;
+        let activeLetterId = null;
+        let isEditingModalLetter = false;
+
+        // ==========================================
+        // INITIALIZATION & RENDERING
+        // ==========================================
+        window.addEventListener('DOMContentLoaded', () => {
+            renderAll();
+            lucide.createIcons();
+        });
+
+        function saveData() {
+            try {
+                localStorage.setItem('for_flo_scrapbook_v2', JSON.stringify(scrapbookData));
+            } catch (e) {
+                showToast("Storage full! Try using fewer or smaller photos.");
+            }
+        }
+
+        function renderAll() {
+            renderHero();
+            renderPolaroids();
+            renderEnvelopes();
+            renderReason();
+            renderBucketList();
+            lucide.createIcons();
+        }
+
+        // 1. HERO & FRIENDSHIP COUNTER
+        function renderHero() {
+            const nameEl = document.getElementById('friendNameDisplay');
+            nameEl.textContent = scrapbookData.friendName;
+            document.getElementById('heroSubtitle').textContent = scrapbookData.subtitle;
+
+            // Populate edit inputs
+            document.getElementById('inputFriendName').value = scrapbookData.friendName;
+            document.getElementById('inputStartDate').value = scrapbookData.startDate;
+            document.getElementById('inputSubtitle').value = scrapbookData.subtitle;
+
+            // Calculate friendship duration
+            const start = new Date(scrapbookData.startDate + 'T00:00:00');
+            const now = new Date();
+            const diffTime = Math.max(0, now - start);
+            const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const rawYears = totalDays / 365.25;
+            const years = rawYears >= 0.99 && rawYears < 1.05 ? '1' : rawYears.toFixed(1).replace(/\.0$/, '');
+
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('formattedStartDate').textContent = isNaN(start) ? 'Day One' : start.toLocaleDateString('en-US', options);
+            document.getElementById('countYears').textContent = years;
+            document.getElementById('countYearsLabel').textContent = years === '1' ? 'Year' : 'Years';
+            document.getElementById('countDays').textContent = totalDays.toLocaleString();
+        }
+
+        function updateHeroData() {
+            scrapbookData.friendName = document.getElementById('inputFriendName').value || "Flo 💜";
+            scrapbookData.startDate = document.getElementById('inputStartDate').value || "2025-11-25";
+            scrapbookData.subtitle = document.getElementById('inputSubtitle').value;
+            saveData();
+            renderHero();
+        }
+
+        // 2. BEACH & SUNSET POLAROID WALL
+        function renderPolaroids() {
+            const grid = document.getElementById('polaroidGrid');
+            grid.innerHTML = '';
+
+            scrapbookData.polaroids.forEach((item, idx) => {
+                const rot = item.rotation || (idx % 2 === 0 ? '-1.5deg' : '1.5deg');
+                const tapeColor = idx % 2 === 0 ? 'bg-plum/25' : 'bg-gold/35';
+                const card = document.createElement('div');
+                card.className = "polaroid-card bg-paper p-4 pb-6 rounded-xl shadow-polaroid border border-plum/10 flex flex-col justify-between relative group";
+                card.style.transform = `rotate(${rot})`;
+
+                card.innerHTML = `
+                    <!-- Purple & Gold Washi Tape Decorative Strip -->
+                    <!-- Photo Frame (Upload enabled only in Customize Mode) -->
+                    ${isEditMode ? `
+                        <label class="relative block aspect-[4/3] w-full overflow-hidden rounded-lg bg-lavender/40 cursor-pointer">
+                            <img src="${item.image}" alt="${escapeHTML(item.caption)}" onerror="this.src='https://placehold.co/600x450/EDE4F7/5B2A86?text=Tap+to+Add+Flo%27s+Photo'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute bottom-2.5 right-2.5 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-plumDark/85 backdrop-blur-xs text-white text-[11px] font-semibold shadow-md border border-white/20 group-hover:bg-plum transition">
+                                <i data-lucide="camera" class="w-3.5 h-3.5 text-gold"></i>
+                                <span>Tap to Upload Photo</span>
+                            </div>
+                            <input type="file" accept="image/*" onchange="handlePhotoUpload(event, ${item.id})">
+                        </label>
+                    ` : `
+                        <div class="relative block aspect-[4/3] w-full overflow-hidden rounded-lg bg-lavender/40">
+                            <img src="${item.image}" alt="${escapeHTML(item.caption)}" onerror="this.src='https://placehold.co/600x450/EDE4F7/5B2A86?text=Memory+With+Flo+%F0%9F%92%9C'" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                    `}
+
+                    <!-- Handwritten Caption & Date (Editable only in Customize Mode) -->
+                    <div class="pt-4 space-y-1 text-center">
+                        ${isEditMode ? `
+                            <div class="relative group/cap">
+                                <input type="text" value="${escapeHTML(item.caption)}" placeholder="Write a caption..." onchange="updatePolaroidText(${item.id}, 'caption', this.value, true)" class="w-full text-center font-hand text-2xl sm:text-[26px] text-ink bg-cream/80 border border-plum/25 focus:border-plum rounded-lg px-2 py-0.5 leading-snug focus:outline-none transition">
+                            </div>
+                            <div>
+                                <input type="text" value="${escapeHTML(item.date)}" placeholder="Add date or tag..." onchange="updatePolaroidText(${item.id}, 'date', this.value, true)" class="w-full text-center text-xs font-medium uppercase tracking-wider text-plum/80 bg-cream/80 border border-plum/20 focus:border-plum rounded-lg px-2 py-0.5 focus:outline-none transition">
+                            </div>
+                        ` : `
+                            <p class="font-hand text-2xl sm:text-[26px] text-ink leading-snug px-2 py-0.5">${escapeHTML(item.caption)}</p>
+                            <p class="text-xs font-medium uppercase tracking-wider text-plum/80 px-2 py-0.5">${escapeHTML(item.date)}</p>
+                        `}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Reusable client-side canvas image compressor (~900px max, JPEG 0.82 quality)
+        function compressImageFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const maxDim = 900;
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxDim || h > maxDim) {
+                            if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+                            else { w = Math.round((w * maxDim) / h); h = maxDim; }
+                        }
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', 0.82));
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handlePhotoUpload(event, id) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            try {
+                const compressedDataUrl = await compressImageFile(file);
+                const target = scrapbookData.polaroids.find(p => p.id === id);
+                if (target) {
+                    target.image = compressedDataUrl;
+                    saveData();
+                    renderPolaroids();
+                    showToast("Flo's photo uploaded! 💜");
+                }
+            } catch (err) {
+                showToast("Couldn't process that image. Please try another.");
+            }
+        }
+
+        async function handleBulkPhotoUpload(event) {
+            const files = Array.from(event.target.files || []);
+            if (!files.length) return;
+
+            const rotations = ['-2deg', '1.5deg', '-1.5deg', '2deg'];
+            const dateLabel = new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            let addedCount = 0;
+
+            for (const file of files) {
+                if (!file.type.startsWith('image/')) continue;
+                try {
+                    const compressedDataUrl = await compressImageFile(file);
+                    scrapbookData.polaroids.push({
+                        id: Date.now() + Math.floor(Math.random() * 10000),
+                        image: compressedDataUrl,
+                        caption: "Favorite memory with Flo 💜",
+                        date: dateLabel,
+                        rotation: rotations[scrapbookData.polaroids.length % rotations.length]
+                    });
+                    addedCount++;
+                } catch (err) {
+                    // Skip unreadable file
+                }
+            }
+
+            if (addedCount > 0) {
+                saveData();
+                renderPolaroids();
+                showToast(`Added ${addedCount} ${addedCount === 1 ? 'photo' : 'photos'} of Flo! 💜`);
+            }
+            event.target.value = '';
+        }
+        function updatePolaroidText(id, field, value, notify = false) {
+            const target = scrapbookData.polaroids.find(p => p.id === id);
+            if (target) {
+                target[field] = value;
+                saveData();
+                if (notify) showToast("Caption saved! 💜");
+            }
+        }
+
+        function addNewPolaroid() {
+            const rotations = ['-2deg', '1.5deg', '-1deg', '2deg'];
+            const newId = Date.now();
+            scrapbookData.polaroids.push({
+                id: newId,
+                image: "https://placehold.co/600x450/EDE4F7/5B2A86?text=Tap+Upload+Photo+for+Flo+%F0%9F%92%9C",
+                caption: "Click to write your caption ✨",
+                date: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                rotation: rotations[scrapbookData.polaroids.length % rotations.length]
+            });
+            saveData();
+            renderPolaroids();
+            showToast("New Polaroid frame added! Tap it to upload a photo.");
+        }
+
+        function deletePolaroid(id) {
+            scrapbookData.polaroids = scrapbookData.polaroids.filter(p => p.id !== id);
+            saveData();
+            renderPolaroids();
+            showToast("Photo removed.");
+        }
+
+        // 3. "OPEN WHEN..." PURPLE ENVELOPES
+        function renderEnvelopes() {
+            const grid = document.getElementById('envelopesGrid');
+            grid.innerHTML = '';
+
+            scrapbookData.letters.forEach((letter) => {
+                const env = document.createElement('div');
+                env.onclick = () => openLetterModal(letter.id);
+                env.className = "envelope-card cursor-pointer bg-paper rounded-2xl p-6 shadow-envelope border border-plum/20 hover:border-plum/45 flex flex-col justify-between min-h-[168px] relative overflow-hidden group";
+
+                env.innerHTML = `
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-plum/10 via-sunset/10 to-transparent rounded-bl-full pointer-events-none"></div>
+                    <div class="flex items-start justify-between gap-2">
+                        <span class="px-3 py-1 rounded-full bg-lavender text-plum text-[11px] font-bold uppercase tracking-wider border border-plum/15">
+                            ${escapeHTML(letter.tag || 'For Flo')}
+                        </span>
+                        <!-- Purple & Gold Wax Seal -->
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-plum to-plumDark text-gold flex items-center justify-center shadow-md border border-gold/40 group-hover:scale-110 transition-transform">
+                            <i data-lucide="heart" class="w-4 h-4 fill-current"></i>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <h3 class="font-serif text-xl font-bold text-ink group-hover:text-plum transition-colors">
+                            ${escapeHTML(letter.title)}
+                        </h3>
+                        <p class="text-xs text-muted mt-2 flex items-center gap-1 font-medium">
+                            <span>Tap to break purple wax seal</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-sunsetCoral group-hover:translate-x-1 transition-transform"></i>
+                        </p>
+                    </div>
+                `;
+                grid.appendChild(env);
+            });
+            lucide.createIcons();
+        }
+
+        function openLetterModal(id) {
+            const letter = scrapbookData.letters.find(l => l.id === id);
+            if (!letter) return;
+            activeLetterId = id;
+            isEditingModalLetter = isEditMode;
+
+            document.getElementById('modalLetterTitle').textContent = letter.title;
+            document.getElementById('modalLetterBody').textContent = letter.body;
+            document.getElementById('editLetterTitleInput').value = letter.title;
+            document.getElementById('editLetterBodyInput').value = letter.body;
+
+            syncModalLetterMode();
+            const modal = document.getElementById('letterModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function toggleModalLetterEdit() {
+            if (isEditingModalLetter) {
+                // Save edits
+                const letter = scrapbookData.letters.find(l => l.id === activeLetterId);
+                if (letter) {
+                    letter.title = document.getElementById('editLetterTitleInput').value.trim() || letter.title;
+                    letter.body = document.getElementById('editLetterBodyInput').value.trim() || letter.body;
+                    saveData();
+                    renderEnvelopes();
+                    document.getElementById('modalLetterTitle').textContent = letter.title;
+                    document.getElementById('modalLetterBody').textContent = letter.body;
+                    showToast("Letter saved for Flo!");
+                }
+            }
+            isEditingModalLetter = !isEditingModalLetter;
+            syncModalLetterMode();
+        }
+
+        function syncModalLetterMode() {
+            const readView = document.getElementById('letterReadView');
+            const editView = document.getElementById('letterEditView');
+            const btn = document.getElementById('toggleLetterEditBtn');
+
+            if (!isEditMode) {
+                btn.classList.add('hidden');
+                btn.classList.remove('flex');
+                readView.classList.remove('hidden');
+                editView.classList.add('hidden');
+                lucide.createIcons();
+                return;
+            }
+
+            btn.classList.remove('hidden');
+            btn.classList.add('flex');
+
+            if (isEditingModalLetter) {
+                readView.classList.add('hidden');
+                editView.classList.remove('hidden');
+                btn.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i><span>Save Changes</span>`;
+            } else {
+                readView.classList.remove('hidden');
+                editView.classList.add('hidden');
+                btn.innerHTML = `<i data-lucide="edit-3" class="w-3.5 h-3.5"></i><span>Edit This Letter</span>`;
+            }
+            lucide.createIcons();
+        }
+
+        function closeLetterModal() {
+            if (isEditingModalLetter) toggleModalLetterEdit();
+            const modal = document.getElementById('letterModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // 4. "WHY FLORENCE IS ONE OF A KIND" CARD DECK
+        function renderReason() {
+            if (!scrapbookData.reasons.length) return;
+            const textEl = document.getElementById('reasonText');
+            const countEl = document.getElementById('reasonCounter');
+            const cardEl = document.getElementById('reasonCard');
+
+            cardEl.classList.remove('animate-card-pop');
+            void cardEl.offsetWidth; // trigger reflow
+            cardEl.classList.add('animate-card-pop');
+
+            textEl.textContent = `"${scrapbookData.reasons[currentReasonIndex]}"`;
+            countEl.textContent = `${currentReasonIndex + 1} / ${scrapbookData.reasons.length}`;
+        }
+
+        function shuffleReason() {
+            if (scrapbookData.reasons.length > 1) {
+                let next;
+                do {
+                    next = Math.floor(Math.random() * scrapbookData.reasons.length);
+                } while (next === currentReasonIndex);
+                currentReasonIndex = next;
+            }
+            renderReason();
+
+            // Purple, Sunset Coral & Gold confetti burst
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 40,
+                    spread: 65,
+                    origin: { y: 0.7 },
+                    colors: ['#5B2A86', '#9D65C9', '#F2855E', '#E5A93B']
+                });
+            }
+        }
+
+        function openAddReasonModal() {
+            document.getElementById('newReasonInput').value = '';
+            const modal = document.getElementById('reasonModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeAddReasonModal() {
+            const modal = document.getElementById('reasonModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function saveNewReason() {
+            const val = document.getElementById('newReasonInput').value.trim();
+            if (!val) return;
+            scrapbookData.reasons.push(val);
+            currentReasonIndex = scrapbookData.reasons.length - 1;
+            saveData();
+            renderReason();
+            closeAddReasonModal();
+            showToast("Added to Flo's deck! 💜");
+        }
+
+        // 5. WHAT TO DO TOGETHER
+        function renderBucketList() {
+            const container = document.getElementById('bucketListContainer');
+            container.innerHTML = '';
+
+            if (scrapbookData.bucketList.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-8 px-4 rounded-2xl border border-dashed border-plum/25 bg-paper/60 text-muted text-sm">
+                        ${isEditMode ? 'No plans added yet—type what you and Flo want to do together in the box above! 💜' : 'Turn on Customize Mode to add plans for you and Flo! 💜'}
+                    </div>
+                `;
+                document.getElementById('bucketProgressText').textContent = `0 of 0`;
+                document.getElementById('bucketProgressBar').style.width = `0%`;
+                return;
+            }
+
+            let completedCount = 0;
+
+            scrapbookData.bucketList.forEach(item => {
+                if (item.done) completedCount++;
+
+                const row = document.createElement('div');
+                row.className = `flex items-center justify-between gap-3 p-4 rounded-2xl border transition-all ${
+                    item.done
+                    ? 'bg-lavender/60 border-plum/25 text-ink/70'
+                    : 'bg-paper border-plum/15 text-ink shadow-2xs hover:border-sunsetCoral/50'
+                }`;
+
+                row.innerHTML = `
+                    <button onclick="toggleBucketItem(${item.id})" class="flex items-center gap-3.5 text-left flex-1">
+                        <div class="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                            item.done
+                            ? 'bg-plum text-white'
+                            : 'border-2 border-plum/40 bg-cream'
+                        }">
+                            ${item.done ? '<i data-lucide="check" class="w-4 h-4"></i>' : ''}
+                        </div>
+                        <span class="text-sm sm:text-base font-medium ${item.done ? 'line-through decoration-plum' : ''}">
+                            ${escapeHTML(item.text)}
+                        </span>
+                    </button>
+                    ${isEditMode ? `
+                        <button onclick="deleteBucketItem(${item.id})" title="Remove plan" class="text-muted hover:text-red-500 p-1">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    ` : ''}
+                `;
+                container.appendChild(row);
+            });
+
+            const total = scrapbookData.bucketList.length;
+            const pct = total === 0 ? 0 : Math.round((completedCount / total) * 100);
+            document.getElementById('bucketProgressText').textContent = `${completedCount} of ${total}`;
+            document.getElementById('bucketProgressBar').style.width = `${pct}%`;
+            lucide.createIcons();
+        }
+
+        function toggleBucketItem(id) {
+            const item = scrapbookData.bucketList.find(b => b.id === id);
+            if (!item) return;
+            item.done = !item.done;
+            saveData();
+            renderBucketList();
+
+            if (item.done && typeof confetti === 'function') {
+                confetti({
+                    particleCount: 45,
+                    spread: 70,
+                    origin: { y: 0.75 },
+                    colors: ['#5B2A86', '#E5A93B', '#F2855E']
+                });
+                showToast("Sunset memory checked off! 💜🌅");
+            }
+        }
+
+        function addBucketItem(e) {
+            e.preventDefault();
+            const input = document.getElementById('newBucketInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            scrapbookData.bucketList.push({
+                id: Date.now(),
+                text: text,
+                done: false
+            });
+            input.value = '';
+            saveData();
+            renderBucketList();
+            showToast("Beach plan added!");
+        }
+
+        function deleteBucketItem(id) {
+            scrapbookData.bucketList = scrapbookData.bucketList.filter(b => b.id !== id);
+            saveData();
+            renderBucketList();
+        }
+
+        // ==========================================
+        // CUSTOMIZE MODE & SHARE / EXPORT TOOLS
+        // ==========================================
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const btn = document.getElementById('toggleEditModeBtn');
+            const label = document.getElementById('editModeLabel');
+            const banner = document.getElementById('editBanner');
+            const heroEditor = document.getElementById('heroEditor');
+            const galleryHelperText = document.getElementById('galleryHelperText');
+            const galleryEditActions = document.getElementById('galleryEditActions');
+            const addReasonBtn = document.getElementById('addReasonBtn');
+            const addBucketForm = document.getElementById('addBucketForm');
+
+            if (isEditMode) {
+                label.textContent = "Customize Mode: ON";
+                btn.classList.add('bg-plum', 'text-white', 'border-plum');
+                btn.classList.remove('bg-paper', 'text-ink');
+                banner.classList.remove('hidden');
+                heroEditor.classList.remove('hidden');
+                galleryHelperText.classList.remove('hidden');
+                galleryEditActions.classList.remove('hidden');
+                galleryEditActions.classList.add('flex');
+                addReasonBtn.classList.remove('hidden');
+                addReasonBtn.classList.add('flex');
+                addBucketForm.classList.remove('hidden');
+                addBucketForm.classList.add('flex');
+            } else {
+                label.textContent = "Customize Mode: OFF";
+                btn.classList.remove('bg-plum', 'text-white', 'border-plum');
+                btn.classList.add('bg-paper', 'text-ink');
+                banner.classList.add('hidden');
+                heroEditor.classList.add('hidden');
+                galleryHelperText.classList.add('hidden');
+                galleryEditActions.classList.add('hidden');
+                galleryEditActions.classList.remove('flex');
+                addReasonBtn.classList.add('hidden');
+                addReasonBtn.classList.remove('flex');
+                addBucketForm.classList.add('hidden');
+                addBucketForm.classList.remove('flex');
+            }
+            renderPolaroids();
+            renderBucketList();
+        }
+
+        function resetToDefaults() {
+            scrapbookData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+            saveData();
+            renderAll();
+            showToast("Reset to Flo's default theme!");
+        }
+
+        function openShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        }
+
+        function closeShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Generates a self-contained HTML file with all custom photos & notes embedded inside!
+        function downloadStandaloneHTML() {
+            const docClone = document.documentElement.cloneNode(true);
+
+            // Ensure edit mode is turned off in the exported gift version
+            const editBanner = docClone.querySelector('#editBanner');
+            if (editBanner) editBanner.classList.add('hidden');
+            const heroEditor = docClone.querySelector('#heroEditor');
+            if (heroEditor) heroEditor.classList.add('hidden');
+
+            // Replace DEFAULT_DATA in the script tag with the user's personalized scrapbookData
+            const scripts = docClone.querySelectorAll('script');
+            scripts.forEach(s => {
+                if (s.textContent.includes('const DEFAULT_DATA =')) {
+                    s.textContent = s.textContent.replace(
+                        /const DEFAULT_DATA = \{[\s\S]*?\};\s*\/\/ Load saved state/,
+                        `const DEFAULT_DATA = ${JSON.stringify(scrapbookData)};\n        // Load saved state`
+                    );
+                }
+            });
+
+            const htmlContent = '<!DOCTYPE html>\n' + docClone.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `for_flo.html`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast("for_flo.html downloaded! 💜");
+        }
+
+        function exportJSONBackup() {
+            const blob = new Blob([JSON.stringify(scrapbookData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'for_flo_backup.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast("Backup JSON downloaded!");
+        }
+
+        function importJSONBackup(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (parsed && parsed.friendName && Array.isArray(parsed.polaroids)) {
+                        scrapbookData = parsed;
+                        saveData();
+                        renderAll();
+                        closeShareModal();
+                        showToast("Flo's scrapbook restored!");
+                    }
+                } catch (err) {
+                    showToast("Invalid backup file.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Helpers
+        function escapeHTML(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 2800);
+        }
+    </script>
+</body>
+</html>
